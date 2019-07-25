@@ -1,0 +1,23 @@
+#include <string>
+#include <iostream>
+#include <map>
+
+using namespace std;
+
+map<char, int> counter(string &st) {
+  map<char, int> cm;
+  for (const auto c : st) {
+    ++cm[c];
+  }
+  return cm;
+}
+
+int main() {
+  string s1, s2;
+  cin >> s1;
+  cin >> s2;
+  auto s1c = counter(s1);
+  auto s2c = counter(s2);
+  if (s1c == s2c) cout << 1;
+  else cout << 0;
+}

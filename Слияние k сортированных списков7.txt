@@ -1,0 +1,68 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <queue>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+	string st;
+	ifstream ifs;
+	ofstream ofs;
+	ifs.open("input.txt");
+	getline(ifs, st);
+	int n = stoi(st);
+	int total = 0;
+	vector<vector<int>> vi(n);
+	for (int i = 0; i < n; ++i) {
+		getline(ifs, st);
+		string num_st;
+		int cnt = 0;
+		int n2 = 0;
+		for (const auto c : st) {
+			if (c == ' ') {
+				if (cnt) vi[i].push_back(stoi(num_st));
+				else n2 = stoi(num_st);
+				++cnt;
+				num_st = "";
+			}
+			else {
+				num_st += c;
+			}
+		}
+		if (cnt && num_st != "") vi[i].push_back(stoi(num_st));
+		vi[i].resize(n2);
+		vi[i].shrink_to_fit();
+		total += n2;
+	}
+	ifs.close();
+
+	priority_queue<pair<int, int>> pq;
+	vector<int> vpos(n);
+
+	for (int i = 0; i < n; ++i) {
+		if (vi[i].size())
+			pq.push(make_pair(vi[i][0], i));
+	}
+
+	vector<int> vres(total);
+
+	for (int i = 0; i < total; ++i) {
+		auto pr = pq.top();
+		pq.pop();
+		vres[i] = pr.first;
+		int vid = pr.second;
+		if (vi[vid].size() > vpos[vid] + 1) {
+			++vpos[vid];
+			pq.push(make_pair(vi[vid][vpos[vid]], vid));
+		}
+	}
+
+	ofs.open("output.txt");
+	for (auto i : vres) {
+		ofs << i << endl;
+	}
+	ofs.close();
+}

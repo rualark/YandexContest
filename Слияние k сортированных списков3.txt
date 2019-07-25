@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+void merge2(const vector<int> &li, const vector<int> &li2, vector<int> &li3) {
+	merge(begin(li), end(li), begin(li2), end(li2), back_inserter(li3));
+}
+
+vector<vector<int>> merge_layer(const vector<vector<int>> &vi) {
+	vector<vector<int>> vi2(ceil(vi.size() / 2.0));
+	for (int i = 0; i < vi2.size(); ++i) {
+		if (vi.size() - 2 * i == 1) {
+			vi2[i] = vi[i * 2];
+		}
+		else {
+			merge2(vi[i * 2], vi[i * 2 + 1], vi2[i]);
+		}
+	}
+	return vi2;
+}
+
+int main() {
+	string st;
+	ifstream ifs;
+	ofstream ofs;
+	ifs.open("input.txt");
+	getline(ifs, st);
+	int n = stoi(st);
+	vector<vector<int>> vi(n);
+	for (int i = 0; i < n; ++i) {
+		getline(ifs, st);
+		string num_st;
+		int cnt = 0;
+		int n2 = 0;
+		for (const auto c : st) {
+			if (c == ' ') {
+				if (cnt) vi[i].push_back(stoi(num_st));
+				else n2 = stoi(num_st);
+				++cnt;
+				num_st = "";
+			}
+			else {
+				num_st += c;
+			}
+		}
+		if (cnt && num_st != "") vi[i].push_back(stoi(num_st));
+		vi[i].resize(n2);
+	}
+	ifs.close();
+
+	while (vi.size() > 1) {
+		vi = std::move(merge_layer(vi));
+	}
+
+	ofs.open("output.txt");
+	for (auto i : vi[0]) {
+		ofs << i << endl;
+	}
+	ofs.close();
+}

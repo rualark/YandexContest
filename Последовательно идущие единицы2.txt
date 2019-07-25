@@ -1,0 +1,32 @@
+#include <string>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main() {
+  string st;
+  ifstream ifs;
+  ofstream ofs;
+  ifs.open("input.txt");
+  getline(ifs, st);
+  int n = stoi(st);
+  int prev_ones = 0;
+  int max_ones = 0;
+  for (int i=0; i<n; ++i) {
+    getline(ifs, st);
+    int num = stoi(st);
+    if (num == 1) {
+      ++prev_ones;
+      if (prev_ones > max_ones) max_ones = prev_ones;
+    }
+    else {
+      prev_ones = 0;
+    }
+  }
+  ifs.close();
+  
+  ofs.open("output.txt");
+  ofs << max_ones;
+  ofs.close();
+}

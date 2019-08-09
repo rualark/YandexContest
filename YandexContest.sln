@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StringHashToVector", "Strin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BST_to_list", "BST_to_list\BST_to_list.vcxproj", "{A54315EA-5F46-43AE-82DA-E997AEA12BDB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QuickSelect", "QuickSelect\QuickSelect.vcxproj", "{ADA9FA36-7559-4BB0-ADD7-C90981E55F4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -151,6 +153,14 @@ Global
 		{A54315EA-5F46-43AE-82DA-E997AEA12BDB}.Release|x64.Build.0 = Release|x64
 		{A54315EA-5F46-43AE-82DA-E997AEA12BDB}.Release|x86.ActiveCfg = Release|Win32
 		{A54315EA-5F46-43AE-82DA-E997AEA12BDB}.Release|x86.Build.0 = Release|Win32
+		{ADA9FA36-7559-4BB0-ADD7-C90981E55F4A}.Debug|x64.ActiveCfg = Debug|x64
+		{ADA9FA36-7559-4BB0-ADD7-C90981E55F4A}.Debug|x64.Build.0 = Debug|x64
+		{ADA9FA36-7559-4BB0-ADD7-C90981E55F4A}.Debug|x86.ActiveCfg = Debug|Win32
+		{ADA9FA36-7559-4BB0-ADD7-C90981E55F4A}.Debug|x86.Build.0 = Debug|Win32
+		{ADA9FA36-7559-4BB0-ADD7-C90981E55F4A}.Release|x64.ActiveCfg = Release|x64
+		{ADA9FA36-7559-4BB0-ADD7-C90981E55F4A}.Release|x64.Build.0 = Release|x64
+		{ADA9FA36-7559-4BB0-ADD7-C90981E55F4A}.Release|x86.ActiveCfg = Release|Win32
+		{ADA9FA36-7559-4BB0-ADD7-C90981E55F4A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

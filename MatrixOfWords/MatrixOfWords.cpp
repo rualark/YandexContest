@@ -134,7 +134,7 @@ void max_matrix(vector<string> &words, vector<Trie> &trie, vector<vector<Letter>
 			if (z % x_size) continue;
 			int y_size = z / x_size;
 			if (y_size > trie.size() - 1) continue;
-			if (y_size == x_size) continue;
+			if (y_size >= x_size) continue;
 			cout << "Checking matrix " << y_size << " x " << x_size << endl;
 			if (build_matrix(words, trie, mat, y_size, x_size)) return;
 		}

@@ -41,6 +41,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShortestSubsequence", "Shor
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WordTransformer", "WordTransformer\WordTransformer.vcxproj", "{ED5D83F0-B4C3-4E11-8376-CA44C6AA8327}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BuildOrderTopologicalSort", "BuildOrderTopologicalSort\BuildOrderTopologicalSort.vcxproj", "{D0210962-7957-488B-8158-2477C18D4516}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -201,6 +203,14 @@ Global
 		{ED5D83F0-B4C3-4E11-8376-CA44C6AA8327}.Release|x64.Build.0 = Release|x64
 		{ED5D83F0-B4C3-4E11-8376-CA44C6AA8327}.Release|x86.ActiveCfg = Release|Win32
 		{ED5D83F0-B4C3-4E11-8376-CA44C6AA8327}.Release|x86.Build.0 = Release|Win32
+		{D0210962-7957-488B-8158-2477C18D4516}.Debug|x64.ActiveCfg = Debug|x64
+		{D0210962-7957-488B-8158-2477C18D4516}.Debug|x64.Build.0 = Debug|x64
+		{D0210962-7957-488B-8158-2477C18D4516}.Debug|x86.ActiveCfg = Debug|Win32
+		{D0210962-7957-488B-8158-2477C18D4516}.Debug|x86.Build.0 = Debug|Win32
+		{D0210962-7957-488B-8158-2477C18D4516}.Release|x64.ActiveCfg = Release|x64
+		{D0210962-7957-488B-8158-2477C18D4516}.Release|x64.Build.0 = Release|x64
+		{D0210962-7957-488B-8158-2477C18D4516}.Release|x86.ActiveCfg = Release|Win32
+		{D0210962-7957-488B-8158-2477C18D4516}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

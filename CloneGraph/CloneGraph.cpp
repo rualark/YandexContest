@@ -14,20 +14,19 @@ struct UndirectedGraphNode {
 UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
 	if (!node) return nullptr;
 	UndirectedGraphNode *root = new UndirectedGraphNode(node->label);
-	unordered_map<uintptr_t, UndirectedGraphNode*> src_to_tgt;
+	unordered_map<UndirectedGraphNode*, UndirectedGraphNode*> src_to_tgt;
 	queue<UndirectedGraphNode*> src_que;
-	src_to_tgt[reinterpret_cast<uintptr_t>(node)] = root;
+	src_to_tgt[node] = root;
 	src_que.push(node);
 	while (src_que.size()) {
 		UndirectedGraphNode* src = src_que.front();
-		UndirectedGraphNode* tgt = src_to_tgt[reinterpret_cast<uintptr_t>(src)];
+		UndirectedGraphNode* tgt = src_to_tgt[src];
 		src_que.pop();
 		// Copy neighbors
 		for (const auto n : src->neighbors) {
 			// Check if this is link to existing node in tgt
-			uintptr_t nip = reinterpret_cast<uintptr_t>(n);
-			if (src_to_tgt.find(nip) != src_to_tgt.end()) {
-				tgt->neighbors.push_back(src_to_tgt[nip]);
+			if (src_to_tgt.find(n) != src_to_tgt.end()) {
+				tgt->neighbors.push_back(src_to_tgt[n]);
 				continue;
 			}
 			// Create empty node
@@ -37,7 +36,7 @@ UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
 			// Queue copying this node
 			src_que.push(n);
 			// Pair src and tgt
-			src_to_tgt[nip] = neighbor;
+			src_to_tgt[n] = neighbor;
 		}
 	}
 	return root;

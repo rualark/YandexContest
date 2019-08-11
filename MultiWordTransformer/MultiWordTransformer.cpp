@@ -5,6 +5,7 @@
 #include <queue>
 #include <unordered_set>
 #include <unordered_map>
+#include <limits>
 
 using namespace std;
 
@@ -17,16 +18,25 @@ void load_words(const string file_name, vector<string> &words) {
 	}
 }
 
+struct WordInfo {
+	WordInfo(string st) : word(st) {}
+	string word;
+	vector<string> parent;
+};
+
 void transform_words(const string w1, const string w2, const vector<string> &words) {
 	if (w1.size() != w2.size()) throw runtime_error("Strings should have same length");
-	queue<string> que;
-	unordered_set<string> visited;
-	unordered_map<string, string> parent;
+	queue<WordInfo> que;
+	unordered_map<string, int> visited_level;
 	int cycle = 0;
-	que.push(w1);
-	visited.insert(w1);
+	que.push(WordInfo(w1));
+	visited_level[w1] = 1;
+	int found_at_level = numeric_limits<int>::max();
 	while (que.size()) {
-		string st = que.front();
+		WordInfo wi = que.front();
+		string st = wi.word;
+		int level = wi.parent.size() + 1;
+		if (level >= found_at_level) return;
 		que.pop();
 		for (int i = 0; i < words.size(); ++i) {
 			if (words[i].size() != st.size()) continue;
@@ -36,20 +46,21 @@ void transform_words(const string w1, const string w2, const vector<string> &wor
 				if (changes > 1) break;
 			}
 			if (changes > 1) continue;
-			if (visited.find(words[i]) != visited.end()) continue;
-			que.push(words[i]);
-			parent[words[i]] = st;
-			visited.insert(words[i]);
+			if (visited_level.find(words[i]) != visited_level.end() &&
+				visited_level[words[i]] <= level) continue;
+			que.push(WordInfo(words[i]));
+			que.back().parent = wi.parent;
+			que.back().parent.push_back(st);
+			visited_level[words[i]] = level + 1;
 			if (words[i] == w2) {
+				found_at_level = level + 1;
 				cout << "Found path after " << cycle << " cycles" << endl;
-				string cur_word = w2;
-				while (cur_word != w1) {
-					cout << cur_word << " -> ";
-					cur_word = parent[cur_word];
+				//cout << w1 << " -> ";
+				for (int i = 0; i < que.back().parent.size(); ++i) {
+					cout << que.back().parent[i] << " -> ";
 				}
-				cout << w1;
+				cout << w2;
 				cout << endl;
-				return;
 			}
 		}
 		cycle++;
@@ -104,7 +115,7 @@ void transform_words_bidirectional(const string &w1, const string &w2, const vec
 			string out_st;
 			string cur_word = intersecting_st;
 			while (cur_word != w1) {
-				if (intersecting_st != cur_word) 
+				if (intersecting_st != cur_word)
 					out_st = cur_word + " -> " + out_st;
 				cur_word = sparent[cur_word];
 			}
@@ -126,11 +137,13 @@ void transform_words_bidirectional(const string &w1, const string &w2, const vec
 
 int main() {
 	vector<string> dict;
-	//load_words("..\\10000_english_words.txt", dict);
-	load_words("..\\370100_english_words.txt", dict);
+	load_words("..\\10000_english_words.txt", dict);
+	//load_words("..\\370100_english_words.txt", dict);
+	dict.push_back("spize");
+	dict.push_back("smize");
 	transform_words("rift", "rend", dict);
 	//transform_words_bidirectional("rift", "rend", dict);
-	//transform_words("build", "smile", dict);
+	transform_words("build", "smile", dict);
 	//transform_words_bidirectional("build", "smile", dict);
 	//transform_words_bidirectional("chicken", "reading", dict);
 }

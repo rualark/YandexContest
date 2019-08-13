@@ -19,6 +19,20 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
+void listInsert(ListNode *before, ListNode *node, ListNode *after) {
+	before->next = node;
+	node->next = after;
+}
+
+void listInsertStart(ListNode *&front, ListNode *node) {
+	node->next = front;
+	front = node;
+}
+
+void listDelete(ListNode *before, ListNode *node, ListNode *after) {
+	before->next = after;
+}
+
 void listPush(ListNode *&front, ListNode *&back, ListNode *node) {
 	if (!front) {
 		front = node;

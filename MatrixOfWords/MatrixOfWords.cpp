@@ -129,7 +129,7 @@ bool build_matrix(vector<string> &words, vector<Trie> &trie, vector<vector<Lette
 
 void max_matrix(vector<string> &words, vector<Trie> &trie, vector<vector<Letter>> &mat) {
 	int max_size = (trie.size() - 1) * (trie.size() - 1);
-	for (int z = max_size; z > 0; z--) {
+	for (int z = 96; z > 0; z--) {
 		for (int x_size = trie.size() - 1; x_size > 2; --x_size) {
 			if (z % x_size) continue;
 			int y_size = z / x_size;
@@ -150,4 +150,5 @@ int main() {
 	build_trie(words, trie);
 	max_matrix(words, trie, mat);
 	//build_matrix(words, trie, mat, 5, 4);
+	getchar();
 }

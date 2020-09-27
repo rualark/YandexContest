@@ -18,13 +18,13 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-void recur(TreeNode *node, TreeNode *&list) {
+void recur(TreeNode *node, TreeNode **list) {
 	if (!node) return;
 	TreeNode *old_l = node->left;
 	TreeNode *old_r = node->right;
-	if (list) list->right = node;
+	if (list) (*list)->right = node;
 	node->left = nullptr; // or list, if double linked list is needed
-	list = node;
+	*list = node;
 	recur(old_l, list);
 	recur(old_r, list);
 }
@@ -32,7 +32,7 @@ void recur(TreeNode *node, TreeNode *&list) {
 TreeNode* flatten(TreeNode* A) {
 	if (!A) return A;
 	TreeNode *list = nullptr;
-	recur(A, list);
+	recur(A, &list);
 	return A;
 }
 

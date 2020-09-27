@@ -24,9 +24,9 @@ void listInsert(ListNode *before, ListNode *node, ListNode *after) {
 	node->next = after;
 }
 
-void listInsertStart(ListNode *&front, ListNode *node) {
-	node->next = front;
-	front = node;
+void listInsertStart(ListNode **front, ListNode *node) {
+	node->next = *front;
+	front = &node;
 }
 
 void listDelete(ListNode *before, ListNode *node, ListNode *after) {

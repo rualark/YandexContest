@@ -8,7 +8,7 @@ int main() {
 	v[0] = true;
 	v[1] = false;
 	std::cout << v[0] << v[1] << std::endl;
-	std::swap(v[0], v[1]);
+	//std::swap(v[0], v[1]);
 	std::cout << v[0] << v[1] << std::endl;
 	return 0;
 }
